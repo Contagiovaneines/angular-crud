@@ -237,10 +237,46 @@ angular-crud/
 Para verificar se o Bootstrap está funcionando, adicione o seguinte código no arquivo `app.component.html`:
 
 ```html
-<div class="container">
-  <h1 class="text-primary">Bem-vindo ao Sistema de Cadastro de Funcionários</h1>
-  <button class="btn btn-success">Clique Aqui</button>
+<div class="container mt-4">
+
+  <!-- Barra de navegação -->
+  <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">
+        <img src="https://cdn-icons-png.flaticon.com/512/4844/4844589.png" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
+        Funcionários
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <button class="btn btn-link nav-link" (click)="showList()">
+              <i class="bi bi-list-ul"></i> Mostrar Lista
+            </button>
+          </li>
+          <li class="nav-item">
+            <button class="btn btn-link nav-link" (click)="showForm()">
+              <i class="bi bi-person-plus"></i> Cadastrar Novo Funcionário
+            </button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Exibe o componente de lista de funcionários se showFuncionarioList for true -->
+  <div *ngIf="showFuncionarioList">
+    <app-funcionario-list></app-funcionario-list>
+  </div>
+
+  <!-- Exibe o formulário de funcionário se showFuncionarioForm for true -->
+  <div *ngIf="showFuncionarioForm">
+    <app-funcionario-form></app-funcionario-form>
+  </div>
 </div>
+
 ```
 
 Se o Bootstrap estiver configurado corretamente, você verá o texto e o botão estilizados com as classes do Bootstrap.
