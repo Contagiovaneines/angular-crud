@@ -1,7 +1,3 @@
-Claro! Aqui está o **documento completo** para o seu projeto **Angular CRUD com Backend Node.js e MySQL**. 
-
----
-
 # **Projeto Angular CRUD com Backend Node.js e MySQL**
 
 Este é um projeto CRUD (Criar, Ler, Atualizar, Excluir) de cadastro de funcionários, utilizando **Angular** para o frontend, **Node.js** para o backend e **MySQL** para o banco de dados. Além disso, o projeto utiliza **Bootstrap** para um design responsivo e moderno.
