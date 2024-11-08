@@ -1,0 +1,46 @@
+<div class="container mt-5">
+  <h2 class="text-center">{{ editMode ? 'Editar Funcionário' : 'Adicionar Funcionário' }}</h2>
+  <form (ngSubmit)="salvarFuncionario()" class="mt-4">
+    <div class="row">
+      <!-- ID -->
+      <div class="col-md-6 mb-3">
+        <label for="id" class="form-label">ID:</label>
+        <input type="number" [(ngModel)]="funcionario.id" name="id" [disabled]="editMode" class="form-control" id="id" />
+      </div>
+
+      <!-- Nome -->
+      <div class="col-md-6 mb-3">
+        <label for="nome" class="form-label">Nome:</label>
+        <input type="text" [(ngModel)]="funcionario.nome" name="nome" required class="form-control" id="nome" />
+      </div>
+    </div>
+
+    <div class="row">
+      <!-- Função -->
+      <div class="col-md-6 mb-3">
+        <label for="funcao" class="form-label">Função:</label>
+        <input type="text" [(ngModel)]="funcionario.funcao" name="funcao" required class="form-control" id="funcao" />
+      </div>
+
+      <!-- Data de Admissão -->
+      <div class="col-md-6 mb-3">
+        <label for="dataAdmissao" class="form-label">Data de Admissão:</label>
+        <input type="date" [(ngModel)]="funcionario.dataAdmissao" name="dataAdmissao" required class="form-control" id="dataAdmissao" />
+      </div>
+    </div>
+
+    <div class="row">
+      <!-- Salário -->
+      <div class="col-md-6 mb-3">
+        <label for="salario" class="form-label">Salário:</label>
+        <input type="number" [(ngModel)]="funcionario.salario" name="salario" required class="form-control" id="salario" />
+      </div>
+    </div>
+
+    <!-- Botões -->
+    <div class="d-flex justify-content-between mt-4">
+      <button type="submit" class="btn btn-primary">{{ editMode ? 'Salvar' : 'Adicionar' }}</button>
+      <button type="button" class="btn btn-secondary" (click)="router.navigate(['/'])">Cancelar</button>
+    </div>
+  </form>
+</div>
