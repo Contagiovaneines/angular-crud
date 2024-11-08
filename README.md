@@ -230,6 +230,9 @@ angular-crud/
 
 ---
 
+Aqui está o código formatado em Markdown com a separação de exemplos de componentes, backend, serviços, e outros arquivos de forma organizada:
+
+```md
 ## **Exemplos de Código**
 
 ### **Componentes Bootstrap no Angular**
@@ -238,7 +241,6 @@ Para verificar se o Bootstrap está funcionando, adicione o seguinte código no 
 
 ```html
 <div class="container mt-4">
-
   <!-- Barra de navegação -->
   <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
@@ -276,15 +278,15 @@ Para verificar se o Bootstrap está funcionando, adicione o seguinte código no 
     <app-funcionario-form></app-funcionario-form>
   </div>
 </div>
-
-
 ```
 
 Se o Bootstrap estiver configurado corretamente, você verá o texto e o botão estilizados com as classes do Bootstrap.
 
+---
+
 ### **Backend Node.js**
 
-No arquivo `config/app.js`
+No arquivo `config/app.js`:
 
 ```javascript
 const express = require('express');
@@ -381,15 +383,118 @@ app.delete('/funcionarios/:id', (req, res) => {
 app.listen(port, () => {
     console.log(`Servidor rodando na porta ${port}`);
 });
-
 ```
 
 ---
 
-## **Licença**
+### **Service em Angular**
 
-Este projeto é licenciado sob a **MIT License**.
+No arquivo `funcionario.service.ts`:
+
+```typescript
+import { Injectable } from '@angular/core';
+import { Funcionario } from '../models/funcionario.model';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class FuncionarioService {
+  private apiUrl = 'http://localhost:3000/funcionarios'; // A URL da API para o backend
+
+  constructor(private http: HttpClient) { }
+
+  // Método para obter todos os funcionários
+  getFuncionarios(): Observable<Funcionario[]> {
+    return this.http.get<Funcionario[]>(this.apiUrl);
+  }
+
+  // Método para obter um único funcionário
+  getFuncionarioById(id: number): Observable<Funcionario> {
+    return this.http.get<Funcionario>(`${this.apiUrl}/${id}`);
+  }
+
+  // Método para adicionar um novo funcionário
+  addFuncionario(funcionario: Funcionario): Observable<Funcionario> {
+    return this.http.post<Funcionario>(this.apiUrl, funcionario);
+  }
+
+  // Método para editar um funcionário
+  editarFuncionario(id: number, funcionario: Funcionario): Observable<Funcionario> {
+    return this.http.put<Funcionario>(`${this.apiUrl}/${id}`, funcionario);
+  }
+
+  // Método para deletar um funcionário
+  deletarFuncionario(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  }
+}
+```
 
 ---
 
-Esse é o **documento completo** para configurar, entender e rodar seu sistema de cadastro de funcionários com **Angular**, **Node.js** e **MySQL**. Certifique-se de seguir todos os passos e ajustar as configurações conforme necessário.
+### **Rotas do Angular**
+
+No arquivo `app-routing.module.ts`:
+
+```typescript
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { FuncionarioListComponent } from './components/funcionario-list/funcionario-list.component';
+import { FuncionarioFormComponent } from './components/funcionario-form/funcionario-form.component';
+
+const routes: Routes = [
+  { path: '', component: FuncionarioListComponent },  // Rota inicial
+  { path: 'funcionario/new', component: FuncionarioFormComponent },  // Criar novo funcionário
+  { path: 'funcionario/edit/:id', component: FuncionarioFormComponent }  // Editar funcionário
+];
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
+})
+export class AppRoutingModule {}
+```
+
+---
+
+### **Componente Principal do Angular**
+
+No arquivo `app.component.ts`:
+
+```typescript
+import { Component } from '@angular/core';
+import { FuncionarioListComponent } from './components/funcionario-list/funcionario-list.component';
+import { FuncionarioFormComponent } from './components/funcionario-form/funcionario-form.component';
+import { DatePipe } from '@angular/common';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css'],
+  providers: [DatePipe]
+})
+export class AppComponent {
+  title = 'angular-crud';
+  showFuncionarioList: boolean = true;  // Controla qual componente mostrar
+  showFuncionarioForm: boolean = false;  // Controla qual componente mostrar
+
+  // Método para exibir a lista de funcionários
+  showList() {
+    this.showFuncionarioList = true;
+    this.showFuncionarioForm = false;
+  }
+
+  // Método para exibir o formulário
+  showForm() {
+    this.showFuncionarioList = false;
+    this.showFuncionarioForm = true;
+
+
+  }
+}
+```
+
+---
+
